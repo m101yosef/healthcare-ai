@@ -1,65 +1,32 @@
-# Summary Insights Report 
-*Phase 2: Data Understanding* 
-
-This report presents an exploratory analysis of heart disease dataset comprising 918 patient records with 12 features. The target variable, `HeartDisease`, indicates the presence (1) or absence (0) of heart disease. I began the analysis with the dataset's size, structure, and key attributes, then looked at whether 'HeartDisease' cases are balanced or not. After that, I explored how features related to 'HeartDisease' and&mdash;how they correlated with each other.
-
-
-## Data Overview
-The dataset is nearly balanced, with 44.7% of patients not having heart disease and 55.3% having heart disease. There are no missing values, which simplifies the data preparation process. 
-
-<div style="padding-left: 24px">
-<img alt="class balance" src="../image/target-balance.png" height="280">
-</div>
-
-## Features Relationships
-
-### Categorical features vs Target
-Based on our dataset, you have a high chance of having a heart disease if: 
-- you are a male, sad short story :), 
-- your fasting blood sugar levels above 120mg/dl, 
-- you experience a chest pain during physical activity (especially Asymptomatic (ASY) and typical angina (TA) chest pain types)
-- the ECG reading is LVH (left ventricular hypertrophy), and 
-- your ST slope is going down or flat....... 
-
-<div style="padding-left: 24px">
-<img alt="Categorical features relationships with target" src="../image/cat-vs-target.png">
-</div>
-
-
-
-### Numerical features distribution 
-For Cholesterol and Oldpeak, there is a different distribution of values, indicating potential differences in heart stress responses and maybe I need to split these two features into more than one group of values (I will test this assumption later)
-
-
-<div style="padding-left: 24px">
-<img alt="Numerical features distribution" src="../image/num-kde.png">
-</div>
-
-
-### Numerical features vs Target
-The heart disease group (almost) has:
-- older ages, 
-- high blood pressure,  
-- lower maximum heart rate, and
-- higher old peak values.
-
-<div style="padding-left: 24px">
-<img alt="Numerical features relationships with target" src="../image/num-vs-target.png">
-</div>
-
-
-### Features Correlation
-MaxHR and Oldpeak show moderate negative and positive correlations with heart disease, respectively, suggesting these features are important predictors. However, the wide spread in cholesterol levels and the slight increase in resting blood pressure in the disease group indicate that these features may have a less direct impact on heart disease risk.
-
-<div style="padding-left: 24px">
-<img alt="Numerical features relationships with target" src="../image/features-corr.png">
-</div>
+# Heart Failure Prediction
+This report is a simple walkthrough of my journey building machine learning models to predict heart disease. I’ll explain what I did, why I did it, what worked, what didn’t, and what I’d do next. If you’re new to data science, don’t worry—I’ll keep things easy to follow and highlight the most important points.
 
 <br>
 
-## Key Takeaways
+## 1. Data Understanding
 
+**What data did I use?**
+- The dataset contains information about people’s health, like age, blood pressure, cholesterol, chest pain type, and whether they have heart disease.
+- There are both numbers (like age) and categories (like chest pain type).
 
+**Why is this data important?**
+- Doctors use these features to decide if someone might have heart disease.
+- The goal is to help predict heart disease early, so people can get the right care.
+
+<br>
+
+### Target Balance 
+The dataset is nearly balanced, with 44.7% of patients not having heart disease and 55.3% having heart disease. There are no missing values, which simplifies the data preparation process. 
+
+<br>
+<div style="padding-left: 24px">
+<img alt="class balance" src="./image/target-balance.png" height="280">
+</div>
+<br>
+
+### Features Relationships vs. Target 
+
+<br>
 <div style="margin-top: 1em; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
 <table style="border-collapse: collapse; width: 100%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 15px; background: white;">
     <thead>
@@ -131,4 +98,81 @@ MaxHR and Oldpeak show moderate negative and positive correlations with heart di
 </table>
 </div>
 
+<br><br>
 
+## 2. Data Preparation
+
+**How did I prepare the data?**
+- I split the data into three parts: 70% for training, 15% for validation, and 15% for testing. This helps make sure the models are fair and not just memorizing the answers.
+- I turned categories (like chest pain type) into numbers using one-hot encoding, so the computer can understand them.
+- I scaled the number features (like age and cholesterol) so they’re all on a similar scale. This helps some models work better.
+
+<br>
+<div style="padding-right: 24px;">
+<img alt="Data split distribution" src="./image/data-split.png">
+</div>
+<br>
+
+## 3. Modelling
+
+**What models did I try?**
+- **Random Forest:** Like a team of decision trees voting together. Good for most problems.
+- **XGBoost:** A powerful boosting method, often wins competitions.
+- **Logistic Regression:** A simple, classic model for yes/no problems.
+- **MLP (Neural Network):** A basic artificial brain, learns patterns in the data.
+
+**How did I train and test them?**
+- I used grid search and cross-validation to find the best settings for each model.
+- I checked how well each model did on the validation and test sets, using accuracy, precision, recall, and F1-score.
+
+<div style="padding: 16px 0;">
+<img alt="Models performance" src="./image/models-performance.png">
+</div>
+<br>
+
+## 4. Model Comparison & Feature Importance
+
+**How did the models compare?**
+- All models performed similarly, with high accuracy (around 89%).
+- The most important features were things like ST segment slope, exercise-induced angina, chest pain type, and oldpeak.
+
+**What does this mean?**
+- The models agree on what’s important, which matches what doctors expect.
+- No single model was a clear winner, but all gave useful insights.
+
+<div style="padding: 16px 0;">
+<img alt="Features importances" src="./image/features-importance.png">
+</div>
+<br>
+
+## Reflection
+**What I Did Right**
+- I used a fair data split and cross-validation to avoid overfitting.
+- I tried several types of models, from simple to more complex.
+- I checked feature importance to understand what drives predictions.
+- I kept the process transparent and reproducible.
+
+<br>
+
+**What I Did Wrong / Could Improve**
+
+- I could have tried more advanced models or combined models (ensembles) for even better results.
+- I didn’t do much feature engineering—creating new features or combining existing ones might help.
+- I could have looked for more data or tried to balance the classes if they were uneven.
+- I didn’t use external validation (like data from another hospital) to check if the models generalize.
+- I could have spent more time on data cleaning and outlier detection.
+
+<br>
+
+**Next Steps**
+
+- Try ensemble methods: Combine several models for better accuracy.
+- Add more data: More data usually means better models.
+- Read research papers: See what the latest science says about heart disease prediction.
+- Work with doctors: Get expert feedback to make the models more useful in real life.
+- Deploy the model: Build a simple app or dashboard for doctors or patients.
+
+<br><br>
+
+Thank you for reading! <br>
+*See you in the next episode*
