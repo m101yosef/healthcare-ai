@@ -7,7 +7,7 @@ This report presents an exploratory analysis of heart disease dataset comprising
 The dataset is nearly balanced, with 44.7% of patients not having heart disease and 55.3% having heart disease. There are no missing values, which simplifies the data preparation process. 
 
 <div style="padding-left: 24px">
-<img alt="class balance" src="../image/target-balance.png" height="280">
+<img alt="class balance" src="./image/target-balance.png" height="280">
 </div>
 
 ## Features Relationships
@@ -21,7 +21,7 @@ Based on our dataset, you have a high chance of having a heart disease if:
 - your ST slope is going down or flat....... 
 
 <div style="padding-left: 24px">
-<img alt="Categorical features relationships with target" src="../image/cat-vs-target.png">
+<img alt="Categorical features relationships with target" src="./image/cat-vs-target.png">
 </div>
 
 
@@ -31,7 +31,7 @@ For Cholesterol and Oldpeak, there is a different distribution of values, indica
 
 
 <div style="padding-left: 24px">
-<img alt="Numerical features distribution" src="../image/num-kde.png">
+<img alt="Numerical features distribution" src="./image/num-kde.png">
 </div>
 
 
@@ -43,7 +43,7 @@ The heart disease group (almost) has:
 - higher old peak values.
 
 <div style="padding-left: 24px">
-<img alt="Numerical features relationships with target" src="../image/num-vs-target.png">
+<img alt="Numerical features relationships with target" src="./image/num-vs-target.png">
 </div>
 
 
@@ -51,7 +51,7 @@ The heart disease group (almost) has:
 MaxHR and Oldpeak show moderate negative and positive correlations with heart disease, respectively, suggesting these features are important predictors. However, the wide spread in cholesterol levels and the slight increase in resting blood pressure in the disease group indicate that these features may have a less direct impact on heart disease risk.
 
 <div style="padding-left: 24px">
-<img alt="Numerical features relationships with target" src="../image/features-corr.png">
+<img alt="Numerical features relationships with target" src="./image/features-corr.png">
 </div>
 
 <br>
